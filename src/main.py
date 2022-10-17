@@ -1,4 +1,5 @@
 import re
+import crawler
 
 INPUT_FILE_PATH = r"C:\Users\alexr\Documents\Projects\RateMyProfessorBot\inputs\initial.txt"
 
@@ -32,11 +33,37 @@ def parse_file_for_professor_names(file_contents: list):
         if result not in r2:
             r2[result] = 1
 
+    r3 = {}
     for value in r2:
 
-        print(value)
-    
+        prof = ''
+        if " " == value[0]:
+
+            prof = re.sub(r" ", "", value, count=4)
+
+            if " " == prof[0]:
+
+                prof = re.sub(r" ", "", prof, count=4)
+
+        prof = prof.replace(",", "")
+
+        if prof == "":
+            continue
+
+        if prof not in r3:
+            r3[prof] = 1
+
+    return r3
 
 file_contents = read_file()
 
-parse_file_for_professor_names(file_contents)
+professor_names = parse_file_for_professor_names(file_contents)
+
+driver = crawler.open_browser()
+
+crawler.close_popup(driver)
+
+for professor in professor_names:
+    print(professor)
+    if professor == professor_names[0]:
+        crawler.get_rating_for_professor(driver, professor, "first")
