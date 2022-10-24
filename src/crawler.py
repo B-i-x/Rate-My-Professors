@@ -29,7 +29,7 @@ def close_popup(driver: webdriver.Chrome):
 
     close_button.click()
 
-def get_rating_for_professor(driver: webdriver.Chrome, professor: str, first_last: str):
+def lookup_professor(driver: webdriver.Chrome, professor: str, first_last: str):
 
     if first_last == "first":
         change_to_prof_xpath = r'//*[contains(text(), "I' + "'" + 'd like")]'
@@ -45,7 +45,7 @@ def get_rating_for_professor(driver: webdriver.Chrome, professor: str, first_las
 
 def verify_school(driver: webdriver.Chrome, desired_school_name: str) -> bool:
 
-    school_card_xpath = r"//div[contains(@class, 'CardSchool__School')]"
+    school_card_xpath = r'//*[contains(@class, "CardSchool")]'
 
     school_name = driver.find_element_by_xpath(school_card_xpath).text()
 
@@ -53,7 +53,7 @@ def verify_school(driver: webdriver.Chrome, desired_school_name: str) -> bool:
 
 def get_rating(driver: webdriver.Chrome) -> float:
 
-    rating_xpath =  r"//div[contains(@class,'CardNumRating')][1]//div[contains(@class,'Number')]"   
+    rating_xpath =  r'//div[contains(@class,"CardNumRating")][1]//div[contains(@class,"Number")]'  
 
     return driver.find_element_by_xpath(rating_xpath).text()
 
