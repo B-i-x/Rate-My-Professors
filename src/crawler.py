@@ -47,7 +47,7 @@ def switch_to_school(driver: webdriver.Chrome, school: str):
 
     driver.implicitly_wait(10)
 
-def lookup_professor(driver: webdriver.Chrome, professor: str, first_last: str = "normal"):
+def lookup_professor(driver: webdriver.Chrome, professor: str):
 
     search_bar_xpath = r"//input[@type='text']"
     searchBar = driver.find_element_by_xpath(search_bar_xpath)
@@ -56,16 +56,19 @@ def lookup_professor(driver: webdriver.Chrome, professor: str, first_last: str =
     a3 = webdriver.ActionChains(driver)
     a3.move_to_element(searchBar).click().send_keys(professor, Keys.ENTER).perform()
 
-def verify_school(driver: webdriver.Chrome, desired_school_name: str) -> bool:
+def is_found(driver: webdriver.Chrome, desired_school_name: str) -> bool:
 
-    school_card_xpath = r'//div/div/div[4]/div[1]/div[1]/div[3]/a/div/div[2]/div[2]//div[2]'
+    no_match_xpath = r'//div[contains(text(),"No professors with ")]'
 
-    school_card = WebDriverWait(driver, timeout=3).until(lambda d: d.find_element(By.XPATH,school_card_xpath))
+    try:
 
-    print(f"found element is {school_card.text}")
+        WebDriverWait(driver, timeout=3).until(lambda d: d.find_element(By.XPATH,no_match_xpath))
 
-    return (str(school_card.text) == desired_school_name)
+        return False
+    except:
+        pass
 
+    return True
 
 
 def get_rating(driver: webdriver.Chrome) -> float:

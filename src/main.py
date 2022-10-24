@@ -75,12 +75,9 @@ crawler.switch_to_school(driver, "University of Arizona")
 for professor in professor_names:
     rating = 'Unknown'
 
-    if professor == professor_names[0]:
-        crawler.lookup_professor(driver, professor, "first")
+    crawler.lookup_professor(driver, professor)
 
-    else: crawler.lookup_professor(driver, professor)
-
-    if (crawler.verify_school(driver, "University of Arizona")):
+    if (crawler.is_found(driver, "University of Arizona")):
         rating = crawler.get_rating(driver)
 
     print(f"{professor}'s rating is {rating}")
