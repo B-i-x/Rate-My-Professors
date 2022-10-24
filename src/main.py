@@ -80,6 +80,8 @@ for professor in professor_names:
     if (crawler.is_found(driver, "University of Arizona")):
         rating = crawler.get_rating(driver)
 
+    crawler.clear_input(driver)
+
     print(f"{professor}'s rating is {rating}")
         
     

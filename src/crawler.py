@@ -52,10 +52,12 @@ def lookup_professor(driver: webdriver.Chrome, professor: str):
 
     search_bar_xpath = r"//input[@type='text']"
     searchBar = driver.find_element_by_xpath(search_bar_xpath)
-    searchBar.clear()
+    
 
     a3 = webdriver.ActionChains(driver)
     a3.move_to_element(searchBar).click().send_keys(professor, Keys.ENTER).perform()
+
+    
 
 def is_found(driver: webdriver.Chrome, desired_school_name: str) -> bool:
 
@@ -78,6 +80,11 @@ def get_rating(driver: webdriver.Chrome) -> float:
 
     return driver.find_element_by_xpath(rating_xpath).text
 
+def clear_input(driver: webdriver.Chrome):
 
-        
+    search_bar_xpath = r"//input[@type='text']"
+    searchBar = driver.find_element_by_xpath(search_bar_xpath)
+    
+    a2 = webdriver.ActionChains(driver)
+    a2.move_to_element(searchBar).click().key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL).send_keys(Keys.DELETE).perform()    
     
