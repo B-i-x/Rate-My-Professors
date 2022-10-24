@@ -57,13 +57,13 @@ def lookup_professor(driver: webdriver.Chrome, professor: str):
 
     
 
-def is_found(driver: webdriver.Chrome, desired_school_name: str) -> bool:
+def is_found(driver: webdriver.Chrome) -> bool:
 
     no_match_xpath = r'//div[contains(text(),"No professors with ")]'
 
     try:
 
-        WebDriverWait(driver, timeout=1).until(lambda d: d.find_element(By.XPATH,no_match_xpath))
+        WebDriverWait(driver, timeout=2).until(lambda d: d.find_element(By.XPATH,no_match_xpath))
 
         return False
     except:
