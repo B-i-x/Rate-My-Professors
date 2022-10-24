@@ -29,7 +29,7 @@ def close_popup(driver: webdriver.Chrome):
 
     close_button.click()
 
-def lookup_professor(driver: webdriver.Chrome, professor: str, first_last: str):
+def lookup_professor(driver: webdriver.Chrome, professor: str, first_last: str = "normal"):
 
     if first_last == "first":
         change_to_prof_xpath = r'//*[contains(text(), "I' + "'" + 'd like")]'
@@ -39,6 +39,7 @@ def lookup_professor(driver: webdriver.Chrome, professor: str, first_last: str):
 
     search_bar_xpath = r"//input[@type='text']"
     searchBar = driver.find_element_by_xpath(search_bar_xpath)
+    searchBar.clear()
 
     a3 = webdriver.ActionChains(driver)
     a3.move_to_element(searchBar).click().send_keys(professor, Keys.ENTER).perform()

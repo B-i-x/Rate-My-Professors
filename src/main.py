@@ -76,6 +76,8 @@ for professor in professor_names:
     if professor == professor_names[0]:
         crawler.lookup_professor(driver, professor, "first")
 
+    else: crawler.lookup_professor(driver, professor)
+
     if (crawler.verify_school(driver, "University of Arizona")):
         rating = crawler.get_rating(driver)
 
