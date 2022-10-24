@@ -38,10 +38,14 @@ def switch_to_school(driver: webdriver.Chrome, school: str):
     a3 = webdriver.ActionChains(driver)
     a3.move_to_element(searchBar).click().send_keys(school).perform()
 
-    driver.implicitly_wait(5)
+    dropdown_xpath = r"//div[contains(@class, 'SearchTypeahead')]"
+
+    WebDriverWait(driver, timeout=3).until(lambda d: d.find_element(By.XPATH,dropdown_xpath))
 
     a2 = webdriver.ActionChains(driver)
-    a2.move_to_element_with_offset(searchBar, 35, 82).perform()
+    a2.move_by_offset(35, 90).click().perform()
+
+    driver.implicitly_wait(10)
 
 def lookup_professor(driver: webdriver.Chrome, professor: str, first_last: str = "normal"):
 
