@@ -1,7 +1,9 @@
 import re
 import crawler
+import csv
 
 INPUT_FILE_PATH = r"C:\Users\alexr\Documents\Projects\RateMyProfessorBot\inputs\initial.txt"
+OUTPUT_FILE_PATH = r"C:\Users\alexr\Documents\Projects\RateMyProfessorBot\output\geneds_150s.csv"
 
 def read_file():
 
@@ -60,6 +62,19 @@ def parse_file_for_professor_names(file_contents: list):
 
     return rlist
 
+def make_csv_file(data):
+
+    header = ['name', 'rating']
+
+    with open(OUTPUT_FILE_PATH, 'w', encoding='UTF8', newline='') as f:
+
+        writer = csv.writer(f)
+
+        writer.writerow(header)
+
+        writer.writerows(data)
+
+
 file_contents = read_file()
 
 professor_names = parse_file_for_professor_names(file_contents)
@@ -86,5 +101,12 @@ for professor in professor_names:
         
     
     professor_ratings[professor] = rating
-            
+
+sorted_ratings = [[k, v] for k, v in sorted(professor_ratings.items(), key = lambda item: item[1])]
+
+make_csv_file(sorted_ratings)
+
+for r in sorted_ratings:
+    print(r)
+
 print(professor_ratings)

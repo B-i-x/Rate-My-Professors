@@ -65,7 +65,7 @@ def is_found(driver: webdriver.Chrome, desired_school_name: str) -> bool:
 
     try:
 
-        WebDriverWait(driver, timeout=3).until(lambda d: d.find_element(By.XPATH,no_match_xpath))
+        WebDriverWait(driver, timeout=1).until(lambda d: d.find_element(By.XPATH,no_match_xpath))
 
         return False
     except:
@@ -84,7 +84,7 @@ def clear_input(driver: webdriver.Chrome):
 
     search_bar_xpath = r"//input[@type='text']"
     searchBar = driver.find_element_by_xpath(search_bar_xpath)
-    
+
     a2 = webdriver.ActionChains(driver)
     a2.move_to_element(searchBar).click().key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL).send_keys(Keys.DELETE).perform()    
     
