@@ -64,11 +64,23 @@ file_contents = read_file()
 
 professor_names = parse_file_for_professor_names(file_contents)
 
+professor_ratings = {}
+
 driver = crawler.open_browser()
 
 crawler.close_popup(driver)
 
 for professor in professor_names:
+    rating = 'Unknown'
     print(professor)
     if professor == professor_names[0]:
-        crawler.get_rating_for_professor(driver, professor, "first")
+        crawler.lookup_professor(driver, professor, "first")
+
+    if (crawler.verify_school(driver, "University of Arizona")):
+        rating = crawler.get_rating(driver)
+        
+    
+    
+    professor_ratings[professor] = rating
+            
+print(professor_ratings)

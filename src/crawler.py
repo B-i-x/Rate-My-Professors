@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys 
 
-def open_browser():
+def open_browser() -> webdriver.Chrome:
     p = r"C:\Users\alexr\Documents\Projects\ChromeDrivers\chromedriver_win32_106\chromedriver.exe"
 
     chrome_options = Options()
@@ -37,11 +37,26 @@ def get_rating_for_professor(driver: webdriver.Chrome, professor: str, first_las
         change_to_prof = driver.find_element_by_xpath(change_to_prof_xpath)
         change_to_prof.click()
 
-        search_bar_xpath = r"//input[@type='text']"
-        searchBar = driver.find_element_by_xpath(search_bar_xpath)
+    search_bar_xpath = r"//input[@type='text']"
+    searchBar = driver.find_element_by_xpath(search_bar_xpath)
 
-        a3 = webdriver.ActionChains(driver)
-        a3.move_to_element(searchBar).click().send_keys(professor, Keys.ENTER).perform()
+    a3 = webdriver.ActionChains(driver)
+    a3.move_to_element(searchBar).click().send_keys(professor, Keys.ENTER).perform()
+
+def verify_school(driver: webdriver.Chrome, desired_school_name: str) -> bool:
+
+    school_card_xpath = r"//div[contains(@class, 'CardSchool__School')]"
+
+    school_name = driver.find_element_by_xpath(school_card_xpath).text()
+
+    return (school_name == desired_school_name)
+
+def get_rating(driver: webdriver.Chrome) -> float:
+
+    rating_xpath =  r"//div[contains(@class,'CardNumRating')][1]//div[contains(@class,'Number')]"   
+
+    return driver.find_element_by_xpath(rating_xpath).text()
+
 
         
     
