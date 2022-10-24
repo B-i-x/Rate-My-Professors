@@ -45,11 +45,15 @@ def lookup_professor(driver: webdriver.Chrome, professor: str, first_last: str):
 
 def verify_school(driver: webdriver.Chrome, desired_school_name: str) -> bool:
 
-    school_card_xpath = r'//*[contains(@class, "CardSchool")]'
+    school_card_xpath = r'//div/div/div[4]/div[1]/div[1]/div[3]/a/div/div[2]/div[2]//div[2]'
 
-    school_name = driver.find_element_by_xpath(school_card_xpath).text()
+    school_card = WebDriverWait(driver, timeout=3).until(lambda d: d.find_element(By.XPATH,school_card_xpath))
 
-    return (school_name == desired_school_name)
+    print(f"found element is {school_card.text}")
+
+    return (str(school_card.text) == desired_school_name)
+
+
 
 def get_rating(driver: webdriver.Chrome) -> float:
 
