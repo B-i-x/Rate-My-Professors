@@ -59,7 +59,7 @@ def get_rating(driver: webdriver.Chrome) -> float:
 
     rating_xpath =  r'//div[contains(@class,"CardNumRating")][1]//div[contains(@class,"Number")]'  
 
-    return driver.find_element_by_xpath(rating_xpath).text()
+    return driver.find_element_by_xpath(rating_xpath).text
 
 
         

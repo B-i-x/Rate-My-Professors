@@ -72,14 +72,15 @@ crawler.close_popup(driver)
 
 for professor in professor_names:
     rating = 'Unknown'
-    print(professor)
+
     if professor == professor_names[0]:
         crawler.lookup_professor(driver, professor, "first")
 
     if (crawler.verify_school(driver, "University of Arizona")):
         rating = crawler.get_rating(driver)
+
+    print(f"{professor}'s rating is {rating}")
         
-    
     
     professor_ratings[professor] = rating
             
