@@ -32,9 +32,16 @@ def close_popup(driver: webdriver.Chrome):
 def get_rating_for_professor(driver: webdriver.Chrome, professor: str, first_last: str):
 
     if first_last == "first":
-        search_bar_xpath = r"/html/body/div[2]/div/div/div[3]/div[2]/div[3]/div[2]/input"
+        change_to_prof_xpath = r'//*[contains(text(), "I' + "'" + 'd like")]'
+        print(change_to_prof_xpath)
+        change_to_prof = driver.find_element_by_xpath(change_to_prof_xpath)
+        change_to_prof.click()
+
+        search_bar_xpath = r"//input[@type='text']"
         searchBar = driver.find_element_by_xpath(search_bar_xpath)
 
         a3 = webdriver.ActionChains(driver)
         a3.move_to_element(searchBar).click().send_keys(professor, Keys.ENTER).perform()
+
+        
     

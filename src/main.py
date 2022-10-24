@@ -53,7 +53,12 @@ def parse_file_for_professor_names(file_contents: list):
         if prof not in r3:
             r3[prof] = 1
 
-    return r3
+    rlist = []
+    
+    for prof in r3:
+        rlist.append(prof)
+
+    return rlist
 
 file_contents = read_file()
 
