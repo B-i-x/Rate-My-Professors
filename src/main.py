@@ -70,6 +70,8 @@ driver = crawler.open_browser()
 
 crawler.close_popup(driver)
 
+crawler.switch_to_school(driver, "University of Arizona")
+
 for professor in professor_names:
     rating = 'Unknown'
 
