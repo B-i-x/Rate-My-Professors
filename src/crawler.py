@@ -39,17 +39,11 @@ def switch_to_school(driver: webdriver.Chrome, school: str):
     a3.move_to_element(searchBar).click().send_keys(school).perform()
 
     driver.implicitly_wait(5)
-    
+
     a2 = webdriver.ActionChains(driver)
-    a2.move_to_element_with_offset(searchBar, 35, 0).perform()
+    a2.move_to_element_with_offset(searchBar, 35, 82).perform()
 
 def lookup_professor(driver: webdriver.Chrome, professor: str, first_last: str = "normal"):
-
-    if first_last == "first":
-        change_to_prof_xpath = r'//*[contains(text(), "I' + "'" + 'd like")]'
-        print(change_to_prof_xpath)
-        change_to_prof = driver.find_element_by_xpath(change_to_prof_xpath)
-        change_to_prof.click()
 
     search_bar_xpath = r"//input[@type='text']"
     searchBar = driver.find_element_by_xpath(search_bar_xpath)
