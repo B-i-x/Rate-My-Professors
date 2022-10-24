@@ -46,8 +46,6 @@ def switch_to_school(driver: webdriver.Chrome, school: str):
     a2.move_by_offset(35, 90).click().perform()
     searchBar.clear()
 
-    driver.implicitly_wait(10)
-
 def lookup_professor(driver: webdriver.Chrome, professor: str):
 
     search_bar_xpath = r"//input[@type='text']"

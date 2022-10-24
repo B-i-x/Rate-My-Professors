@@ -13,7 +13,7 @@ def read_file():
         return lines
 
 def parse_file_for_professor_names(file_contents: list):
-
+    ''' dont judge this function it was made really really really quickly :('''
     s = ''
 
     for line in file_contents:
