@@ -13,8 +13,6 @@ def open_browser() -> webdriver.Chrome:
 
     driver = webdriver.Chrome(executable_path=p, chrome_options=chrome_options)
 
-    driver.get("https://www.ratemyprofessors.com/")
-
     return driver
 
 def close_popup(driver: webdriver.Chrome):
