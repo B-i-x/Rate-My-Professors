@@ -2,8 +2,8 @@ import re
 import crawler
 import csv
 
-INPUT_FILE_PATH = r"C:\Users\alexr\Documents\Projects\RateMyProfessorBot\inputs\tier2_150s.txt"
-OUTPUT_FILE_PATH = r"C:\Users\alexr\Documents\Projects\RateMyProfessorBot\output\teir2_sum_sum.csv"
+INPUT_FILE_PATH = r"C:\Users\alexr\Documents\Projects\Rate-My-Professors\inputs\all_ece_under_500.txt"
+OUTPUT_FILE_PATH = r"C:\Users\alexr\Documents\Projects\Rate-My-Professors\output\ece_under_500.csv"
 
 def read_file():
 
@@ -83,7 +83,10 @@ professor_ratings = {}
 
 driver = crawler.open_browser()
 
-crawler.close_popup(driver)
+crawler.close_popup_1(driver)
+
+crawler.close_popup_2(driver)
+
 
 crawler.switch_to_school(driver, "University of Arizona")
 

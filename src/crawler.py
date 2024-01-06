@@ -8,16 +8,16 @@ from selenium.webdriver.common.keys import Keys
 def open_browser() -> webdriver.Chrome:
     p = r"C:\Users\alexr\Documents\Projects\ChromeDrivers\chromedriver_win32_108\chromedriver.exe"
 
-    chrome_options = Options()
+    chrome_options = webdriver.ChromeOptions()
     chrome_options.add_experimental_option("detach", True)
 
-    driver = webdriver.Chrome(executable_path=p, chrome_options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
 
     driver.get("https://www.ratemyprofessors.com/")
 
     return driver
 
-def close_popup(driver: webdriver.Chrome):
+def close_popup_1(driver: webdriver.Chrome):
 
     button_xpath = "/html/body/div[5]/div/div/button"
 
@@ -29,6 +29,18 @@ def close_popup(driver: webdriver.Chrome):
 
     close_button.click()
 
+def close_popup_2(driver: webdriver.Chrome):
+
+    button_xpath = '//*[@id="pendo-close-guide-f789ac0a"]'
+
+    button_present = EC.presence_of_element_located((By.XPATH,button_xpath))
+
+    WebDriverWait(driver, timeout=9999).until(button_present)
+
+    close_button = driver.find_element("xpath",(button_xpath))
+
+    close_button.click()
+    
 def switch_to_school(driver: webdriver.Chrome, school: str):
 
     search_bar_xpath = r"//input[@type='text']"
